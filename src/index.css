@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-paper font-body text-ink antialiased; }
+:focus-visible { outline: 4px solid #8E7CC3; outline-offset: 3px; }
+
+@layer components {
+  .btn-big {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-4 border-ink px-6 py-3
+           font-display text-xl font-bold shadow-chunkySm transition-transform active:translate-y-1 active:shadow-none
+           disabled:opacity-40 disabled:pointer-events-none;
+  }
+}

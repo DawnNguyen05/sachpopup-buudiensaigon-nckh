@@ -1,0 +1,143 @@
+[
+  {
+    "id": "chu-rong-nho",
+    "title": "Bưu điện Sài Gòn",
+    "description": "Khám phá câu chuyện lịch sử về Bưu điện Trung tâm Sài Gòn qua từng trang sách nổi 3D.",
+    "emoji": "📮",
+    "color": "#FFF7EA",
+    "thumbnail": "/thumbs/chu-rong-nho.jpg",
+    "openingVideo": "/videos/OpeningMain.mp4",
+    "bgm": "/audio/MusicBackground.MP3",
+    "bgmVolume": 0.35,
+    "pages": [
+      {
+        "id": "chu-rong-nho-p1",
+        "title": "Ý Nghĩa Của Cái Tên",
+        "description": "Mang ý nghĩa như chiếc cầu nối thông tin đầu tiên giữa Sài Gòn với thế giới.",
+        "narration": "Mang ý nghĩa như chiếc cầu nối thông tin đầu tiên giữa Sài Gòn với thế giới, Bưu điện Sài Gòn không chỉ là nơi gửi nhận thư từ mà còn là di sản thân thương trong lòng người dân.",
+        "video": "/videos/Trang1_SFX.mp4",
+        "audio": "/audio/SoundTrang1.mp3",
+        "audioStartAt": 2,
+        "hotspot": {
+          "appearAt": 3,
+          "left": "6.5%",
+          "top": "66.5%",
+          "width": "14%",
+          "height": "21.5%",
+          "rotate": -18,
+          "label": "Mở lá thư bí mật",
+          "video": "/videos/LetterSecret.mp4" 
+        }
+      },
+      {
+        "id": "chu-rong-nho-p2",
+        "title": "Lịch sử hình thành",
+        "description": "Hành trình hơn 130 năm của tòa Bưu điện giữa lòng thành phố.",
+        "narration": "Công trình được khởi công xây dựng và trở thành biểu tượng kiến trúc độc đáo của Sài Gòn.",
+        "video": "/videos/Trang2_SFX.mp4",
+        "audio": "/audio/SoundTrang2.MP3",
+        "audioStartAt": 0.1
+      },
+      {
+        "id": "chu-rong-nho-p3",
+        "type": "quiz",
+        "title": "Câu hỏi: Bưu điện Sài Gòn",
+        "description": "Chọn một đáp án đúng để kiểm tra kiến thức về Bưu điện Sài Gòn.",
+        "narration": "Tòa Bưu điện khoác chiếc áo màu vàng rực rỡ này đã hơn 130 tuổi rồi đấy!",
+        "audio": "/audio/Question.mp3",
+        "audioStartAt": 1,
+        "quiz": {
+          "backgroundImage": "/images/quiz-bg.png",
+          "questionImage": "/images/quiz-question.png",
+          "correctId": "B",
+          "options": [
+            { "id": "A", "label": "A", "value": "1890", "image": "/images/dap-an-A.png", "side": "left", "pillTop": true },
+            { "id": "B", "label": "B", "value": "1891", "image": "/images/dap-an-B.png", "side": "right", "pillTop": true },
+            { "id": "C", "label": "C", "value": "1892", "image": "/images/dap-an-C.png", "side": "left", "pillTop": false },
+            { "id": "D", "label": "D", "value": "1893", "image": "/images/dap-an-D.png", "side": "right", "pillTop": false }
+          ]
+        }
+      },
+      {
+        "id": "chu-rong-nho-p4",
+        "title": "Mặt đồng hồ Bưu điện",
+        "description": "Cùng khám phá chiếc đồng hồ lịch sử và trả lời câu hỏi vui.",
+        "narration": "Mặt đồng hồ được chia làm mấy phần bằng nhau?",
+        "video": "/videos/Trang4_Sfx.mp4",
+        "audio": "/audio/Sound_trang4.mp3",
+        "audioStartAt": 2,
+        "videoQuiz": {
+          "pauseAt": 11,
+          "correctId": "D",
+          "options": [
+            { "id": "A", "label": "A", "value": "5" },
+            { "id": "B", "label": "B", "value": "7" },
+            { "id": "C", "label": "C", "value": "9" },
+            { "id": "D", "label": "D", "value": "12" }
+          ],
+          "area": {
+            "top": "34%",
+            "left": "19%",
+            "width": "66%",
+            "height": "50%"
+          }
+        }
+      },
+      {
+        "id": "chu-rong-nho-p5",
+        "title": "Thế Giới Tem Thư Tí Hon",
+        "description": "Nhỏ mà có vỏ! Những chiếc tem này như một tấm vé thông hành, giúp lá thư vi vu đi khắp nơi!",
+        "narration": "Nhỏ mà có vỏ! Những chiếc tem này như một tấm vé thông hành, giúp lá thư vi vu đi khắp nơi!",
+        "video": "/videos/Trang5.2.mp4",
+        "audio": "/audio/Sound_trang5.MP3",
+        "audioStartAt": 0,
+        "stampHotspot": {
+          "appearAt": 0,
+          "left": "87%",
+          "top": "34%",
+          "width": "10%",
+          "height": "16%",
+          "rotate": 12,
+          "label": "Bấm để trải nghiệm đóng dấu mộc bưu điện",
+          "video": "",
+          "bgImage": "/images/BG-01.png",
+          "cursorImage": "/images/cursor-01.png",
+          "stampImages": [
+            "/images/stamps/stamp-01.png",
+            "/images/stamps/stamp-02.png",
+            "/images/stamps/stamp-03.png",
+            "/images/stamps/stamp-04.png",
+            "/images/stamps/stamp-05.png",
+            "/images/stamps/stamp-06.png"
+          ]
+        }
+      },
+      {
+        "id": "chu-rong-nho-p6",
+        "title": "Mini Game: Đường Đến Bưu Điện",
+        "description": "Bé hãy giúp lá thư vượt qua mê cung để chuyển thư đến Bưu điện Sài Gòn nhé!",
+        "narration": "Hãy bấm nút 'Chơi trò chơi' để cùng lá thư vượt qua mê cung đến Bưu điện Sài Gòn nào!",
+        "video": "/videos/Trang6_SFX.mp4",
+        "audio": "",
+        "audioStartAt": 0,
+        "mazeGame": {
+          "appearAt": 3.5,
+          "buttonText": "Chơi trò chơi",
+          "buttonPosition": {
+            "top": "80%",
+            "left": "37%"
+          },
+          "playerImage": "/images/Player.png",
+          "destinationImage": "/images/Destination.png",
+          "patternImages": [
+            "/images/patterns/Asset 1.png",
+            "/images/patterns/Asset 2.png",
+            "/images/patterns/Asset 3.png",
+            "/images/patterns/Asset 4.png"
+          ],
+          "title": "MINI GAME: ĐƯỜNG ĐẾN BƯU ĐIỆN"
+        }
+      }
+    ]
+  }
+]
