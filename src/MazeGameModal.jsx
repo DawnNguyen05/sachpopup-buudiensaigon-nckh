@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { RotateCcw, Sparkles, Trophy, X } from 'lucide-react'
+import { resolvePath } from './utils/path'
 
 // Âm thanh tiếng bước chân / pop vui tai bằng Web Audio API
 function playStepSound() {
@@ -210,6 +211,10 @@ export default function MazeGameModal({
   patternImages = [],
   title = 'Đường đến Bưu điện',
 }) {
+  const resolvedPlayerImage = resolvePath(playerImage)
+  const resolvedDestinationImage = resolvePath(destinationImage)
+  const resolvedPatternImages = (patternImages || []).map(resolvePath)
+
   const [playerPos, setPlayerPos] = useState(START_POS)
   // Ô xuất phát (1, 9) có sẵn hoa văn 1 dưới chân
   const [visited, setVisited] = useState({ [`${START_POS.x},${START_POS.y}`]: 0 })
@@ -518,9 +523,9 @@ export default function MazeGameModal({
                       transition={{ duration: 0.18 }}
                       className="h-full w-full overflow-hidden"
                     >
-                      {patternImages[patternIdx] ? (
+                      {resolvedPatternImages[patternIdx] ? (
                         <img
-                          src={patternImages[patternIdx]}
+                          src={resolvedPatternImages[patternIdx]}
                           alt=""
                           className="h-full w-full object-cover select-none pointer-events-none"
                           onError={(e) => {
@@ -552,9 +557,9 @@ export default function MazeGameModal({
                   }}
                   className="z-20 grid place-items-center pointer-events-none drop-shadow-md"
                 >
-                  {destinationImage ? (
+                  {resolvedDestinationImage ? (
                     <img
-                      src={destinationImage}
+                      src={resolvedDestinationImage}
                       alt="Bưu điện Sài Gòn"
                       className="h-full w-full object-contain"
                     />
@@ -587,9 +592,9 @@ export default function MazeGameModal({
                     transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
                     className="h-full w-full scale-110"
                   >
-                    {playerImage ? (
+                    {resolvedPlayerImage ? (
                       <img
-                        src={playerImage}
+                        src={resolvedPlayerImage}
                         alt="Lá thư"
                         className="h-full w-full object-contain drop-shadow-md"
                       />

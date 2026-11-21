@@ -20,8 +20,9 @@ import SettingsModal from './SettingsModal'
 import StampGameModal from './StampGameModal'
 import VideoQuizOverlay from './VideoQuizOverlay'
 import MazeGameModal from './MazeGameModal'
+import { resolvePath } from './utils/path'
 
-const normalizePath = (p) => (p ? (p.startsWith('/') ? p : `/${p}`) : '')
+const normalizePath = resolvePath
 
 export default function Viewer({ story, ready = true, onBack }) {
   const total = story.pages.length

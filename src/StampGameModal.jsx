@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { RotateCcw, Sparkles, X } from 'lucide-react'
+import { resolvePath } from './utils/path'
 
 // Phát âm thanh dập dấu mộc gỗ chân thực bằng Web Audio API (không cần tải thêm file audio)
 function playThumpSound(customAudioSrc) {
@@ -157,6 +158,11 @@ export default function StampGameModal({
   stampSoundSrc,
   title = 'Bé đóng dấu bưu điện',
 }) {
+  const resolvedBgImage = resolvePath(bgImage)
+  const resolvedCursorImage = resolvePath(cursorImage)
+  const resolvedVideoSrc = resolvePath(videoSrc)
+  const resolvedStampImages = (stampImages || []).map(resolvePath)
+
   const [stamps, setStamps] = useState([])
   const [mousePos, setMousePos] = useState({ x: -100, y: -100, visible: false })
   const [isPressing, setIsPressing] = useState(false)
@@ -198,9 +204,9 @@ export default function StampGameModal({
     let chosenImage = null
     let chosenSvgType = Math.floor(Math.random() * 4)
 
-    if (stampImages && stampImages.length > 0) {
-      const randIdx = Math.floor(Math.random() * stampImages.length)
-      chosenImage = stampImages[randIdx]
+    if (resolvedStampImages && resolvedStampImages.length > 0) {
+      const randIdx = Math.floor(Math.random() * resolvedStampImages.length)
+      chosenImage = resolvedStampImages[randIdx]
     }
 
     const newStamp = {
@@ -271,15 +277,15 @@ export default function StampGameModal({
             onClick={handleStampClick}
             className="relative h-full w-full cursor-none overflow-hidden bg-[#FBF0A5]"
             style={{
-              backgroundImage: bgImage ? `url(${bgImage})` : undefined,
+              backgroundImage: resolvedBgImage ? `url(${resolvedBgImage})` : undefined,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
             {/* Nếu có video nền của người dùng (tùy chọn) */}
-            {videoSrc && (
+            {resolvedVideoSrc && (
               <video
-                src={videoSrc}
+                src={resolvedVideoSrc}
                 autoPlay
                 loop
                 muted
@@ -331,9 +337,9 @@ export default function StampGameModal({
                   zIndex: 40,
                 }}
               >
-                {cursorImage ? (
+                {resolvedCursorImage ? (
                   <img
-                    src={cursorImage}
+                    src={resolvedCursorImage}
                     alt=""
                     className="pointer-events-none select-none transition-transform duration-75"
                     style={{

@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import Home from './Home'
 import Viewer from './Viewer'
+import { resolvePath } from './utils/path'
 
-const normalizePath = (p) => (p ? (p.startsWith('/') ? p : `/${p}`) : '')
+const normalizePath = resolvePath
 
 export default function App() {
   const [stories, setStories] = useState([])
@@ -12,7 +13,7 @@ export default function App() {
   const [error, setError] = useState('')
 
   const loadStories = useCallback(() => {
-    return fetch(`/data/stories.json?t=${Date.now()}`, { cache: 'no-store' })
+    return fetch(resolvePath(`/data/stories.json?t=${Date.now()}`), { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         setStories(data)

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, Sparkles, XCircle } from 'lucide-react'
+import { resolvePath } from './utils/path'
 
-const normalizePath = (p) => (p ? (p.startsWith('/') ? p : `/${p}`) : '')
+const normalizePath = resolvePath
 
 // Cấu hình mặc định theo đúng thiết kế trang 3 (Bưu điện Sài Gòn)
 // Bạn có thể bỏ ảnh PNG vào thư mục public/images/ hoặc chỉnh đường dẫn trong public/data/stories.json
