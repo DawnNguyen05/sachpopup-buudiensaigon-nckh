@@ -84,7 +84,30 @@ export default function App() {
           </AnimatePresence>
         </>
       ) : (
-        <Home stories={stories} error={error} onOpen={handleOpen} />
+        <>
+          <Home stories={stories} error={error} onOpen={handleOpen} />
+          {/* Tải trước video mở đầu & video trang 1 ngay khi bé đang xem Trang chủ */}
+          {stories[0]?.openingVideo && (
+            <video
+              src={normalizePath(stories[0].openingVideo)}
+              preload="auto"
+              muted
+              playsInline
+              className="pointer-events-none hidden"
+              style={{ display: 'none' }}
+            />
+          )}
+          {stories[0]?.pages?.[0]?.video && (
+            <video
+              src={normalizePath(stories[0].pages[0].video)}
+              preload="auto"
+              muted
+              playsInline
+              className="pointer-events-none hidden"
+              style={{ display: 'none' }}
+            />
+          )}
+        </>
       )}
     </MotionConfig>
   )

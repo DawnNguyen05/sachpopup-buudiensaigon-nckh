@@ -75,13 +75,19 @@ export default function Viewer({ story, ready = true, onBack }) {
   const [mazeButtonVisible, setMazeButtonVisible] = useState(false)
   const [mazeGameOpen, setMazeGameOpen] = useState(false)
 
+  // Trạng thái đệm video khi mạng chậm
+  const [videoBuffering, setVideoBuffering] = useState(false)
+
   const videoRef = useRef(null)
   const page = story.pages[index]
+  const nextPage = story.pages[index + 1]
   const isQuiz = page?.type === 'quiz' || Boolean(page?.quiz)
   const videoQuiz = page?.videoQuiz
   const mazeGame = page?.mazeGame
   const videoSrc = normalizePath(page?.video)
   const audioSrc = normalizePath(page?.audio)
+  const nextVideoSrc = normalizePath(nextPage?.video)
+  const nextAudioSrc = normalizePath(nextPage?.audio)
   const audioStartAt = Number(page?.audioStartAt ?? 0)
   const hotspot = page?.hotspot
   const hotspotVideoSrc = normalizePath(hotspot?.video)
@@ -220,6 +226,7 @@ export default function Viewer({ story, ready = true, onBack }) {
     setMazeGameOpen(false)
     setShowVideoQuiz(false)
     setVideoQuizSolved(false)
+    setVideoBuffering(false)
     // Nếu video chưa có hoặc appearAt <= 0 thì hiện sẵn vùng bấm lá thư / nút mini game để dễ kiểm tra
     setHotspotVisible(!videoSrc || Number(hotspot?.appearAt ?? 0) <= 0)
     setMazeButtonVisible(!videoSrc || Number(mazeGame?.appearAt ?? 0) <= 0)
@@ -507,19 +514,60 @@ export default function Viewer({ story, ready = true, onBack }) {
                 preload="auto"
                 muted={muted}
                 onTimeUpdate={handleTimeUpdate}
-                onPlay={() => {
+                onWaiting={() => setVideoBuffering(true)}
+                onPlaying={() => {
+                  setVideoBuffering(false)
                   setPlaying(true)
                   if (index === 0 && !bgmStarted) {
                     startBgm()
                   }
                 }}
+                onCanPlay={() => setVideoBuffering(false)}
                 onPause={() => setPlaying(false)}
                 onEnded={handleEnded}
                 onError={() => {
                   setFailed(true)
+                  setVideoBuffering(false)
                   if (hotspot) setHotspotVisible(true)
                 }}
                 onClick={togglePlay}
+              />
+            )}
+
+            {/* Thông báo đang tải video nhẹ nhàng khi mạng yếu / đang đệm */}
+            <AnimatePresence>
+              {videoBuffering && !failed && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="pointer-events-none absolute inset-0 z-20 grid place-items-center bg-ink/35 backdrop-blur-[2px]"
+                >
+                  <div className="flex items-center gap-2 rounded-full border-2 border-ink bg-lemon px-4 py-2 font-display text-sm font-black text-ink shadow-chunkySm">
+                    <Sparkles size={18} className="animate-spin text-grape" />
+                    Đang tải chuyển động...
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Kỹ thuật Tải trước thông minh (Preload): Âm thầm tải video & audio trang tiếp theo để lật trang là phát ngay */}
+            {nextVideoSrc && (
+              <video
+                src={nextVideoSrc}
+                preload="auto"
+                muted
+                playsInline
+                className="pointer-events-none hidden"
+                style={{ display: 'none' }}
+              />
+            )}
+            {nextAudioSrc && (
+              <audio
+                src={nextAudioSrc}
+                preload="auto"
+                muted
+                className="hidden"
               />
             )}
 
